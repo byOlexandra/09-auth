@@ -1,11 +1,14 @@
-'use client'
+"use client";
 
 import Image from "next/image";
-import css from './EditProfilePage.module.css'
+import css from "./EditProfilePage.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
 import { updateMe, UpdateUsername } from "@/lib/api/clientApi";
+import { useRouter } from "next/navigation";
 
 export default function EditProfilePage() {
+    const router = useRouter();
+
     const user = useAuthStore((state) => state.user);
     const setUser = useAuthStore((state) => state.setUser);
 
@@ -16,10 +19,22 @@ export default function EditProfilePage() {
             username: formValue.username as string,
         };
 
-        const res = await updateMe(updateData);
-        if (setUser) setUser(res);
-        console.log(res)
-        return res
+        try {
+            const res = await updateMe(updateData);
+
+            if (res) {
+                if (setUser) setUser(res);
+                router.push("/profile");
+
+                return res;
+            }
+        } catch (error) {
+            console.error("Update failed:", error);
+        }
+    };
+
+    const handleCancel = () => {
+        router.push('/profile')
     }
 
     return (
@@ -27,7 +42,8 @@ export default function EditProfilePage() {
             <div className={css.profileCard}>
                 <h1 className={css.formTitle}>Edit Profile</h1>
 
-                <Image src={user?.avatar || ''}
+                <Image
+                    src={user?.avatar || ""}
                     alt="User Avatar"
                     width={120}
                     height={120}
@@ -37,27 +53,27 @@ export default function EditProfilePage() {
                 <form className={css.profileInfo} action={handleSave}>
                     <div className={css.usernameWrapper}>
                         <label htmlFor="username">Username:</label>
-                        <input id="username"
+                        <input
+                            id="username"
                             type="text"
                             name="username"
                             className={css.input}
-                            defaultValue={user?.username || ''}
+                            defaultValue={user?.username || ""}
                         />
                     </div>
 
-                    <p>Email: {user?.email || ''}</p>
+                    <p>Email: {user?.email || ""}</p>
 
                     <div className={css.actions}>
                         <button type="submit" className={css.saveButton}>
                             Save
                         </button>
-                        <button type="button" className={css.cancelButton}>
+                        <button type="button" className={css.cancelButton} onClick={handleCancel}>
                             Cancel
                         </button>
                     </div>
                 </form>
             </div>
         </main>
-
-    )
+    );
 }
