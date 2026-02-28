@@ -1,16 +1,21 @@
-import Image from "next/image";
-import css from './ProfilePage.module.css'
-import Link from "next/link";
-import { Metadata } from "next";
+'use client'
 
-export async function generateMetadata(): Promise<Metadata> {
-    return {
-        title: 'username`s page',
-        description: 'usernamedjjdjdjd'
-    }
-}
+import Image from "next/image";
+import css from "./ProfilePage.module.css";
+import Link from "next/link";
+// import { Metadata } from "next";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function Profile() {
+    const user = useAuthStore((state) => state.user);
+
+    // export function metadata:Metadata() {
+    //     return {
+    //         title: "Yout Profile",
+    //         description: "Watch your profile and edit",
+    //     };
+    // }
+
     return (
         <main className={css.mainContent}>
             <div className={css.profileCard}>
@@ -21,17 +26,17 @@ export default function Profile() {
                     </Link>
                 </div>
                 <div className={css.avatarWrapper}>
-                    {/* <Image
-                        src="Avatar"
+                    <Image
+                        src={user?.avatar}
                         alt="User Avatar"
                         width={120}
                         height={120}
                         className={css.avatar}
-                    /> */}
+                    />
                 </div>
                 <div className={css.profileInfo}>
-                    <p>Username: your_username</p>
-                    <p>Email: your_email@example.com</p>
+                    <p>Username: {user?.username}</p>
+                    <p>Email: {user?.email}</p>
                 </div>
             </div>
         </main>

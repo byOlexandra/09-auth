@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { CreateNoteInForm } from "@/types/note";
-import { createNote } from "@/lib/clientApi";
+import { createNote } from "@/lib/api/clientApi";
 
 const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
 

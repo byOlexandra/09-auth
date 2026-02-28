@@ -23,6 +23,12 @@ export default function AuthNavigation() {
 
     return (
         <>
+            <li className={css.navigationItem}>
+                <Link href="/">Home</Link>
+            </li>
+            <li className={css.navigationItem}>
+                <Link href="/notes/filter/all">Notes</Link>
+            </li>
             {isAuthenticated ? (
                 <>
                     <li className={css.navigationItem}>

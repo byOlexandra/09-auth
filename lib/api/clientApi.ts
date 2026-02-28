@@ -14,10 +14,7 @@ export async function fetchNotes(
                 search: query,
                 page: page,
                 tag: tag === "all" ? undefined : tag,
-            },
-            headers: {
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_URL}`,
-            },
+            }
         });
         console.log(data);
         return {
@@ -99,5 +96,15 @@ export async function logout(): Promise<void> {
 
 export async function getMe() {
     const res = await clientApi.get<User>("/users/me");
+    return res.data;
+};
+
+export interface UpdateUsername {
+    username: string,
+    email: string
+}
+
+export async function updateMe({ email, username }: UpdateUsername): Promise<User> {
+    const res = await clientApi.patch<User>("/users/me", { email, username });
     return res.data;
 };
