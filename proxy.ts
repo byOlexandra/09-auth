@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { parse } from 'cookie';
 import { checkSession } from './lib/api/serverApi';
+import { AxiosResponse } from 'axios';
 
 const privateRoutes = ['/profile'];
 const publicRoutes = ['/sign-in', '/sign-up'];
@@ -19,7 +20,9 @@ export async function proxy(request: NextRequest) {
         if (refreshToken) {
 
             const data = await checkSession();
-            const setCookie = data.headers['set-cookie'];
+
+            const axiosData = data as AxiosResponse;
+            const setCookie = axiosData.headers?.['set-cookie'];
 
             if (setCookie) {
                 const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
