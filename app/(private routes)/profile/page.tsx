@@ -16,9 +16,9 @@ export default function Profile() {
             <div className={css.profileCard}>
                 <div className={css.header}>
                     <h1 className={css.formTitle}>Profile Page</h1>
-                    {/* <Link src="/profile/edit" className={css.editProfileButton}>
+                    <Link href="/profile/edit" className={css.editProfileButton}>
                         Edit Profile
-                    </Link> */}
+                    </Link>
                 </div>
                 <div className={css.avatarWrapper}>
                     {/* <Image

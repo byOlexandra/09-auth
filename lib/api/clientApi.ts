@@ -6,14 +6,14 @@ import { api } from "./api";
 export async function fetchNotes(
     query: string,
     page: number,
-    tag?: string
+    tag?: string,
 ): Promise<FetchNotesResponse> {
     try {
         const { data } = await api.get<FetchNotesResponse>("/notes", {
             params: {
                 search: query,
                 page: page,
-                tag: tag === 'all' ? undefined : tag
+                tag: tag === "all" ? undefined : tag,
             },
             headers: {
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_URL}`,
@@ -68,7 +68,7 @@ export async function deleteNote(id: string): Promise<Note> {
 }
 
 export const clientApi = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL + '/api',
+    baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
     withCredentials: true,
 });
 
@@ -78,7 +78,7 @@ export type RegisterRequest = {
 };
 
 export async function register(data: RegisterRequest): Promise<User> {
-    const res = await clientApi.post<User>('/auth/register', data);
+    const res = await clientApi.post<User>("/auth/register", data);
     return res.data;
 }
 
@@ -96,3 +96,8 @@ export async function logout(): Promise<void> {
     const res = await clientApi.post("/auth/logout");
     return res.data;
 }
+
+export async function getMe() {
+    const res = await clientApi.get<User>("/users/me");
+    return res.data;
+};

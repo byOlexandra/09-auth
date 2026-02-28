@@ -17,9 +17,9 @@ export default function AuthNavigation() {
             console.error("Logout failed", e);
         } finally {
             clearIsAuthenticated();
-            router.push('/sign-in');
+            router.push("/sign-in");
         }
-    }
+    };
 
     return (
         <>
@@ -36,7 +36,11 @@ export default function AuthNavigation() {
                     </li>
                     <li className={css.navigationItem}>
                         <p className={css.userEmail}>{user?.email}</p>
-                        <button className={css.logoutButton} suppressHydrationWarning onClick={handleLogoutBtn}>
+                        <button
+                            className={css.logoutButton}
+                            suppressHydrationWarning
+                            onClick={handleLogoutBtn}
+                        >
                             Logout
                         </button>
                     </li>
