@@ -7,6 +7,7 @@ export async function fetchNotes(
     query: string,
     page: number,
     tag?: string,
+    accessToken?: string
 ): Promise<FetchNotesResponse> {
     try {
         const { data } = await api.get<FetchNotesResponse>("/notes", {
@@ -14,7 +15,11 @@ export async function fetchNotes(
                 search: query,
                 page: page,
                 tag: tag === "all" ? undefined : tag,
-            }
+            },
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+
         });
         console.log(data);
         return {
