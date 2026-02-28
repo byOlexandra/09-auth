@@ -34,8 +34,8 @@ export default function EditProfilePage() {
     };
 
     const handleCancel = () => {
-        router.push('/profile')
-    }
+        router.push("/profile");
+    };
 
     return (
         <main className={css.mainContent}>
@@ -50,7 +50,14 @@ export default function EditProfilePage() {
                     className={css.avatar}
                 />
 
-                <form className={css.profileInfo} action={handleSave}>
+                <form
+                    className={css.profileInfo}
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        handleSave(formData);
+                    }}
+                >
                     <div className={css.usernameWrapper}>
                         <label htmlFor="username">Username:</label>
                         <input
@@ -68,7 +75,11 @@ export default function EditProfilePage() {
                         <button type="submit" className={css.saveButton}>
                             Save
                         </button>
-                        <button type="button" className={css.cancelButton} onClick={handleCancel}>
+                        <button
+                            type="button"
+                            className={css.cancelButton}
+                            onClick={handleCancel}
+                        >
                             Cancel
                         </button>
                     </div>
