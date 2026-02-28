@@ -1,32 +1,31 @@
+import Link from 'next/link';
 import css from './AuthNavigation.module.css'
 
 export default function AuthNavigation() {
     return (
         <>
             <li className={css.navigationItem}>
-                <a href="/profile" className={css.navigationLink}>
+                <Link href="/profile" className={css.navigationLink} prefetch={false}>
                     Profile
-                </a>
+                </Link>
             </li>
 
             <li className={css.navigationItem}>
                 <p className={css.userEmail}>User email</p>
-                <button className={css.logoutButton}>Logout</button>
+                <button className={css.logoutButton} suppressHydrationWarning>Logout</button>
             </li>
 
             <li className={css.navigationItem}>
-                <a href="/sign-in" className={css.navigationLink}>
+                <Link href="/sign-in" className={css.navigationLink} prefetch={false} suppressHydrationWarning>
                     Login
-                </a>
+                </Link>
             </li>
 
             <li className={css.navigationItem}>
-                <a href="/sign-up" className={css.navigationLink}>
+                <Link href="/sign-up" className={css.navigationLink} prefetch={false}>
                     Sign up
-                </a>
+                </Link>
             </li>
         </>
     );
 }
-
-// prefetch = { false}

@@ -1,5 +1,6 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
 import { api } from "./api";
+import { User } from "@/types/user";
 
 export async function fetchNotes(
     query: string,
@@ -70,16 +71,17 @@ export type RegisterRequest = {
     password: string;
 };
 
-export type User = {
-    id: string;
-    email: string;
-    userName?: string;
-    photoUrl?: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
-
-export async function register(data: RegisterRequest) {
+export async function register(data: RegisterRequest): Promise<User> {
     const res = await api.post<User>('/auth/register', data);
+    return res.data;
+}
+
+export interface LoginRequest {
+    email: string;
+    password: string;
+}
+
+export async function login(data: LoginRequest) {
+    const res = await api.post<User>("/auth/login", data);
     return res.data;
 }
