@@ -8,8 +8,8 @@ import Pagination from "@/components/Pagination/Pagination";
 import { Toaster } from "react-hot-toast";
 import NoteList from "@/components/NoteList/NoteList";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
 import Link from "next/link";
+import { fetchNotes } from "@/app/api/clientApi";
 
 interface NotesClientProps {
     activeTag: string | undefined;

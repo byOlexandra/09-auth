@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export interface Note {
     id: string,
     title: string,
@@ -13,3 +15,5 @@ export interface FetchNotesResponse {
 }
 
 export type CreateNoteInForm = Omit<Note, "id" | "createdAt" | "updatedAt">;
+
+export type ApiError = AxiosError<{ error: string }>

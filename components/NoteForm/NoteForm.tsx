@@ -1,23 +1,14 @@
 "use client";
 
 import css from "./NoteForm.module.css";
-import { createNote } from "@/lib/api";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-// import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { CreateNoteInForm } from "@/types/note";
+import { createNote } from "@/app/api/clientApi";
 
 const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
-
-// const noteFormSchema = Yup.object().shape({
-//     title: Yup.string()
-//         .min(3, "Minimum 3 letters")
-//         .max(50, "Maximum 50 letters")
-//         .required("Title is required"),
-//     content: Yup.string().max(500, "500 letters is maximum"),
-//     tag: Yup.string().oneOf(tags).required("Tag is required"),
-// });
 
 export default function NoteForm() {
     const router = useRouter();
@@ -103,7 +94,6 @@ export default function NoteForm() {
                     type="button"
                     className={css.cancelButton}
                     onClick={handleCancel}
-                // suppressHydrationWarning
                 >
                     Cancel
                 </button>
@@ -111,7 +101,6 @@ export default function NoteForm() {
                     type="submit"
                     className={css.submitButton}
                     disabled={isPending}
-                // suppressHydrationWarning
                 >
                     {isPending ? "Creating..." : "Create note"}
                 </button>
