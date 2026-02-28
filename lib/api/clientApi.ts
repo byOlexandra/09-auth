@@ -91,3 +91,8 @@ export async function login(data: LoginRequest) {
     const res = await clientApi.post<User>("/auth/login", data);
     return res.data;
 }
+
+export async function logout(): Promise<void> {
+    const res = await clientApi.post("/auth/logout");
+    return res.data;
+}

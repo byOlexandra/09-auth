@@ -4,7 +4,7 @@ import Link from "next/link";
 import css from "./AuthNavigation.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
-import { clientApi } from "@/lib/api/clientApi";
+import { logout } from "@/lib/api/clientApi";
 
 export default function AuthNavigation() {
     const router = useRouter();
@@ -12,7 +12,7 @@ export default function AuthNavigation() {
 
     const handleLogoutBtn = async () => {
         try {
-            await clientApi.post('/auth/logout');
+            await logout();
         } catch (e) {
             console.error("Logout failed", e);
         } finally {
