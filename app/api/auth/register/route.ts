@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
 import { isAxiosError } from "axios";
-import { api } from "../../api";
 import { logErrorResponse } from "@/app/_utils/utils";
 import { ApiError } from "@/types/note";
+import { api } from "@/lib/api/api";
 
 export async function POST(req: NextRequest) {
     try {

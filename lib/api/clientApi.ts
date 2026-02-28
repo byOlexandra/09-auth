@@ -1,6 +1,7 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
-import { api } from "./api";
 import { User } from "@/types/user";
+import axios from "axios";
+import { api } from "./api";
 
 export async function fetchNotes(
     query: string,
@@ -66,13 +67,18 @@ export async function deleteNote(id: string): Promise<Note> {
     }
 }
 
+export const clientApi = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL + '/api',
+    withCredentials: true,
+});
+
 export type RegisterRequest = {
     email: string;
     password: string;
 };
 
 export async function register(data: RegisterRequest): Promise<User> {
-    const res = await api.post<User>('/auth/register', data);
+    const res = await clientApi.post<User>('/auth/register', data);
     return res.data;
 }
 
@@ -82,6 +88,6 @@ export interface LoginRequest {
 }
 
 export async function login(data: LoginRequest) {
-    const res = await api.post<User>("/auth/login", data);
+    const res = await clientApi.post<User>("/auth/login", data);
     return res.data;
 }

@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import css from './SignInPage.module.css'
 import { useRouter } from 'next/navigation';
-import { login, LoginRequest } from '@/app/api/clientApi';
 import { ApiError } from '@/types/note';
+import { useAuthStore } from '@/lib/store/authStore';
+import { login, LoginRequest } from '@/lib/api/clientApi';
 
 export default function SignInPage() {
     const router = useRouter();
     const [error, setError] = useState('');
-    // const setUser = useAuthStore((state) => state.setUser);
+    const setUser = useAuthStore((state) => state.setUser);
 
     const handleSubmit = async (formData: FormData) => {
         try {
@@ -18,7 +19,7 @@ export default function SignInPage() {
             ) as unknown as LoginRequest;
             const user = await login(formValues);
             if (user) {
-                // setUser(user);
+                setUser(user);
                 router.push("/profile");
             } else {
                 setError("Invalid email or password");
