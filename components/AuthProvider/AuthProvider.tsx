@@ -1,6 +1,5 @@
 'use client'
 
-import { api } from "@/lib/api/api";
 import { getMe } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore"
 import { usePathname } from "next/navigation";
@@ -23,27 +22,30 @@ export default function AuthProvider({ children }: Props) {
     const router = useRouter();
 
     useEffect(() => {
-        const checkSession = async () => {
-            setIsLoading(true);
+        const initAuth = async () => {
+            setIsLoading(true)
             try {
-                await api.get('/auth/session');
-
                 const userData = await getMe();
-
                 setUser(userData);
             } catch (error) {
                 clearIsAuthenticated();
-
-                if (!publicRoutes.includes(pathname)) {
-                    router.push('/login');
-                }
             } finally {
                 setIsLoading(false);
             }
-        };
+        }
+        initAuth();
+    }, [setUser, clearIsAuthenticated]);
 
-        checkSession();
-    }, [pathname, setUser, clearIsAuthenticated, router]);
+    useEffect(() => {
+        if (!isLoading) {
+            const isAuthenticated = !!user;
+            const isPublicRoute = publicRoutes.includes(pathname);
+
+            if (!isAuthenticated && !isPublicRoute) {
+                router.push('/sign-in');
+            }
+        }
+    }, [pathname, user, isLoading, router]);
 
     if (isLoading) {
         return (
@@ -51,12 +53,6 @@ export default function AuthProvider({ children }: Props) {
                 <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
             </div>
         );
-    }
-
-    const isAuthenticated = !!user;
-
-    if (!isAuthenticated && !publicRoutes.includes(pathname)) {
-        return null;
     }
 
     return children;

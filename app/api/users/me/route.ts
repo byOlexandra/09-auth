@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { isAxiosError } from 'axios';
 import { logErrorResponse } from '@/app/_utils/utils';
-import { api } from '@/lib/api/api';
+import { api } from '@/app/api/api';
 
 export async function GET() {
     try {

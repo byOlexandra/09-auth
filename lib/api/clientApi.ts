@@ -1,7 +1,7 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
 import { User } from "@/types/user";
 import axios from "axios";
-import { api } from "./api";
+import { api } from "../../app/api/api";
 
 export async function fetchNotes(
     query: string,
@@ -33,11 +33,7 @@ export async function fetchNotes(
 }
 
 export async function fetchNoteById(id: string): Promise<Note> {
-    const { data } = await api.get<Note>(`/notes/${id}`, {
-        headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_URL}`,
-        },
-    });
+    const { data } = await clientApi.get<Note>(`/notes/${id}`);
     return data;
 }
 
@@ -113,3 +109,12 @@ export async function updateMe({ email, username }: UpdateUsername): Promise<Use
     const res = await clientApi.patch<User>("/users/me", { email, username });
     return res.data;
 };
+
+export async function checkSession(): Promise<User | null> {
+    try {
+        const res = await clientApi.get<User>("/auth/session");
+        return res.data;
+    } catch (error) {
+        return null;
+    }
+}
