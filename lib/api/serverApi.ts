@@ -5,6 +5,7 @@ import { User } from '@/types/user';
 
 export const serverApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
+    withCredentials: true,
 })
 
 export const checkSession = async () => {

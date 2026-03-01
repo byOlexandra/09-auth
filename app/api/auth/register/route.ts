@@ -4,7 +4,7 @@ import { parse } from "cookie";
 import { isAxiosError } from "axios";
 import { logErrorResponse } from "@/app/_utils/utils";
 import { ApiError } from "@/types/note";
-import { api } from "@/app/api/api";
+import { api } from "../../api";
 
 export async function POST(req: NextRequest) {
     try {
