@@ -94,10 +94,10 @@ export interface SessionResponse {
     message: string;
 }
 
-export async function checkSession(): Promise<AxiosResponse<SessionResponse> | null> {
+export async function checkSession(): Promise<SessionResponse | null> {
     try {
         const res = await api.get<SessionResponse>("/auth/session");
-        return res;
+        return res.data;
     } catch (error) {
         return null;
     }
