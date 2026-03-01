@@ -1,11 +1,6 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
 import { User } from "@/types/user";
-import axios from "axios";
-
-export const clientApi = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
-    withCredentials: true,
-});
+import { api } from "./api";
 
 export async function fetchNotes(
     query: string,
@@ -13,7 +8,7 @@ export async function fetchNotes(
     tag?: string,
 ): Promise<FetchNotesResponse> {
     try {
-        const { data } = await clientApi.get<FetchNotesResponse>("/notes", {
+        const { data } = await api.get<FetchNotesResponse>("/notes", {
             params: {
                 search: query,
                 page: page,
@@ -32,13 +27,13 @@ export async function fetchNotes(
 }
 
 export async function fetchNoteById(id: string): Promise<Note> {
-    const { data } = await clientApi.get<Note>(`/notes/${id}`);
+    const { data } = await api.get<Note>(`/notes/${id}`);
     return data;
 }
 
 export async function createNote(noteData: CreateNoteInForm): Promise<Note> {
     try {
-        const { data } = await clientApi.post<Note>("/notes", noteData);
+        const { data } = await api.post<Note>("/notes", noteData);
         return data;
     } catch (error) {
         console.error("Error creating note:", error);
@@ -48,7 +43,7 @@ export async function createNote(noteData: CreateNoteInForm): Promise<Note> {
 
 export async function deleteNote(id: string): Promise<Note> {
     try {
-        const { data } = await clientApi.delete<Note>(`/notes/${id}`);
+        const { data } = await api.delete<Note>(`/notes/${id}`);
         return data;
     } catch (error) {
         console.log(error);
@@ -62,7 +57,7 @@ export type RegisterRequest = {
 };
 
 export async function register(data: RegisterRequest): Promise<User> {
-    const res = await clientApi.post<User>("/auth/register", data);
+    const res = await api.post<User>("/auth/register", data);
     return res.data;
 }
 
@@ -72,17 +67,17 @@ export interface LoginRequest {
 }
 
 export async function login(data: LoginRequest) {
-    const res = await clientApi.post<User>("/auth/login", data);
+    const res = await api.post<User>("/auth/login", data);
     return res.data;
 }
 
 export async function logout(): Promise<void> {
-    const res = await clientApi.post("/auth/logout");
+    const res = await api.post("/auth/logout");
     return res.data;
 }
 
 export async function getMe() {
-    const res = await clientApi.get<User>("/users/me");
+    const res = await api.get<User>("/users/me");
     return res.data;
 };
 
@@ -92,13 +87,13 @@ export interface UpdateUsername {
 }
 
 export async function updateMe({ email, username }: UpdateUsername): Promise<User> {
-    const res = await clientApi.patch<User>("/users/me", { email, username });
+    const res = await api.patch<User>("/users/me", { email, username });
     return res.data;
 };
 
 export async function checkSession(): Promise<User | null> {
     try {
-        const res = await clientApi.get<User>("/auth/session");
+        const res = await api.get<User>("/auth/session");
         return res.data;
     } catch (error) {
         return null;

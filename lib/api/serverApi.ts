@@ -1,12 +1,7 @@
 import { cookies } from 'next/headers';
 import { ApiError, FetchNotesResponse, Note } from '@/types/note';
-import axios from 'axios';
 import { User } from '@/types/user';
-
-export const serverApi = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL + "/api",
-    withCredentials: true,
-})
+import { api } from './api';
 
 export const checkSession = async () => {
     const cookieStore = await cookies();
@@ -17,7 +12,7 @@ export const checkSession = async () => {
     }
 
     try {
-        const res = await serverApi.get('/auth/session', {
+        const res = await api.get('/auth/session', {
             headers: {
                 Cookie: allCookies,
             },
@@ -32,7 +27,7 @@ export const checkSession = async () => {
 export const fetchNotes = async (query: string, page: number, tag?: string): Promise<FetchNotesResponse> => {
     const cookieStore = await cookies();
     const allCookies = cookieStore.toString();
-    const { data } = await serverApi.get<FetchNotesResponse>('/notes', {
+    const { data } = await api.get<FetchNotesResponse>('/notes', {
         params: {
             search: query,
             page: page,
@@ -49,7 +44,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
     const cookieStore = await cookies();
     const allCookies = cookieStore.toString();
 
-    const { data } = await serverApi.get<Note>(`/notes/${id}`, {
+    const { data } = await api.get<Note>(`/notes/${id}`, {
         headers: {
             Cookie: allCookies,
         },
@@ -61,7 +56,7 @@ export const getMe = async (): Promise<User> => {
     const cookieStore = await cookies();
     const allCookies = cookieStore.toString();
 
-    const { data } = await serverApi.get<User>(`/users/me`, {
+    const { data } = await api.get<User>(`/users/me`, {
         headers: {
             Cookie: allCookies,
         },
