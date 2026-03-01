@@ -10,7 +10,7 @@ interface Props {
     children: React.ReactNode,
 }
 
-const publicRoutes = ['/login', '/register', '/'];
+const publicRoutes = ['/sign-in', '/register', '/sign-up'];
 
 export default function AuthProvider({ children }: Props) {
     const [isLoading, setIsLoading] = useState(true);
