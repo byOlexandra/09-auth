@@ -1,12 +1,15 @@
 'use client';
 
-import { useAuthStore } from '@/lib/store/authStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import css from "./ProfilePage.module.css";
+import { User } from '@/types/user';
 
-export default function ProfilePage() {
-    const user = useAuthStore((state) => state.user);
+interface ProfilePageProps {
+    user: User | null;
+}
+
+export default function ProfilePage({ user }: ProfilePageProps) {
 
     return (
         <main className={css.mainContent}>

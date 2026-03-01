@@ -5,9 +5,13 @@ import css from "./EditProfilePage.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
 import { updateMe, UpdateUsername } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
+import { ApiError } from "@/types/note";
+import { useState } from "react";
 
 export default function EditProfilePage() {
     const router = useRouter();
+
+    const [error, setError] = useState("");
 
     const user = useAuthStore((state) => state.user);
     const setUser = useAuthStore((state) => state.setUser);
@@ -15,7 +19,6 @@ export default function EditProfilePage() {
     const handleSave = async (formData: FormData) => {
         const formValue = Object.fromEntries(formData);
         const updateData: UpdateUsername = {
-            email: user?.email || "",
             username: formValue.username as string,
         };
 
@@ -25,11 +28,12 @@ export default function EditProfilePage() {
             if (res) {
                 if (setUser) setUser(res);
                 router.push("/profile");
-
-                return res;
             }
         } catch (error) {
-            console.error("Update failed:", error);
+            const backendMessage =
+                (error as ApiError).response?.data?.message ||
+                (error as ApiError).response?.data?.error;
+            setError(backendMessage || "Update failed");
         }
     };
 
@@ -50,14 +54,7 @@ export default function EditProfilePage() {
                     className={css.avatar}
                 />
 
-                <form
-                    className={css.profileInfo}
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        const formData = new FormData(e.currentTarget);
-                        handleSave(formData);
-                    }}
-                >
+                <form className={css.profileInfo} action={handleSave}>
                     <div className={css.usernameWrapper}>
                         <label htmlFor="username">Username:</label>
                         <input

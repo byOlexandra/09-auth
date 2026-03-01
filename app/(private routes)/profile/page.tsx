@@ -31,8 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 }
 
-export default function Profile() {
+export default async function Profile() {
+    const user = await getMe();
+
     return (
-        <ProfilePage />
+        <ProfilePage user={user} />
     )
 }

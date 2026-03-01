@@ -15,6 +15,7 @@ export default function SignUpPage() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError('')
 
         const formData = new FormData(e.currentTarget);
         try {
@@ -24,14 +25,13 @@ export default function SignUpPage() {
                 setUser(user);
                 router.push("/profile");
             } else {
-                setError("Invalid email or password");
+                setError("Registration failed. Please try again.");
             }
         } catch (error) {
-            setError(
-                (error as ApiError).response?.data?.error ??
-                (error as ApiError).message ??
-                "Oops... some error",
-            );
+            const backendMessage = (error as ApiError).response?.data?.message || (error as ApiError).response?.data?.error;
+            const fallbackMessage = (error as ApiError).message || "Something went wrong";
+
+            setError(backendMessage || fallbackMessage);
         }
     };
 

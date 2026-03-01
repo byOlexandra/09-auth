@@ -16,4 +16,15 @@ export interface FetchNotesResponse {
 
 export type CreateNoteInForm = Omit<Note, "id" | "createdAt" | "updatedAt">;
 
-export type ApiError = AxiosError<{ error: string }>
+export type ApiError = {
+    response?: {
+        data?: ApiErrorData;
+        status?: number;
+    };
+    message: string;
+}
+
+export type ApiErrorData = {
+    message?: string;
+    error?: string;
+}

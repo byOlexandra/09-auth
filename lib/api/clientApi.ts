@@ -1,6 +1,7 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
 import { User } from "@/types/user";
 import { api } from "./api";
+import { AxiosResponse } from "axios";
 
 export async function fetchNotes(
     query: string,
@@ -66,35 +67,37 @@ export interface LoginRequest {
     password: string;
 }
 
-export async function login(data: LoginRequest) {
+export async function login(data: LoginRequest): Promise<User> {
     const res = await api.post<User>("/auth/login", data);
     return res.data;
 }
 
 export async function logout(): Promise<void> {
-    const res = await api.post("/auth/logout");
-    return res.data;
+    await api.post("/auth/logout");
 }
 
-export async function getMe() {
+export async function getMe(): Promise<User> {
     const res = await api.get<User>("/users/me");
     return res.data;
 };
 
 export interface UpdateUsername {
-    username: string,
-    email: string
+    username: string
 }
 
-export async function updateMe({ email, username }: UpdateUsername): Promise<User> {
-    const res = await api.patch<User>("/users/me", { email, username });
+export async function updateMe({ username }: UpdateUsername): Promise<User> {
+    const res = await api.patch<User>("/users/me", { username });
     return res.data;
 };
 
-export async function checkSession(): Promise<User | null> {
+export interface SessionResponse {
+    message: string;
+}
+
+export async function checkSession(): Promise<AxiosResponse<SessionResponse> | null> {
     try {
-        const res = await api.get<User>("/auth/session");
-        return res.data;
+        const res = await api.get<SessionResponse>("/auth/session");
+        return res;
     } catch (error) {
         return null;
     }
