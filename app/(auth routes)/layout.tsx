@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState, startTransition } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, startTransition } from "react";
+import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
 
 type Props = {
     children: React.ReactNode;
@@ -19,5 +20,5 @@ export default function PublicLayout({ children }: Props) {
         });
     }, [router]);
 
-    return <>{loading ? <div>Loading...</div> : children}</>;
+    return <>{loading ? <Loader /> : children}</>;
 }
