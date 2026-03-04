@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Notes App
 
-## Getting Started
+This project is a modern web application for managing notes with a full-featured authentication system. Built with **Next.js (App Router)**, it ensures fast performance, protected routes, and a seamless user experience.
 
-First, run the development server:
+🔗 **Live Demo:** [https://09-auth-one-self.vercel.app/](https://09-auth-one-self.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🔐 **Authentication:** Secure user registration, login, and logout.
+- 🛡️ **Protected Routes:** Access to notes and profile pages is restricted to authorized users only.
+- 📓 **Notes Management (CRUD):** Create, read, update, and delete your personal notes.
+- 👤 **User Profile:** Display and manage current user information.
+- 🌓 **Dark Theme:** Modern and stylish UI optimized for comfortable use.
+- ⚡ **Optimization:** Leverages Next.js Server and Client components for maximum efficiency.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠 Tech Stack
 
-## Learn More
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **State Management:** Zustand
+- **Data Fetching:** Axios (with separate Client and Server API instances for Cookie handling)
+- **Styling:** CSS Modules
+- **Deployment:** Vercel
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/app` — Routing logic (pages and layouts).
+- `/components` — Reusable UI components.
+- `/store` — Zustand store configuration (auth, notes).
+- `/api` — Backend interaction logic (Axios instances).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ⚙️ Local Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Clone the repository:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    cd your-repo-name
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Configure environment variables:**
+    Create a `.env.local` file and add your API backend URL:
+
+    ```env
+    NEXT_PUBLIC_API_URL=[https://your-api-address.com](https://your-api-address.com)
+    ```
+
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 👨‍💻 Project by
+
+**Oleksandra Starovatova** — Junior Frontend Developer.
