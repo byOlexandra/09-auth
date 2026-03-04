@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    border-right: 1px solid #ddd;
+}
+
+.notes  {
+    flex: 1;
+     padding: 20px;
+}
