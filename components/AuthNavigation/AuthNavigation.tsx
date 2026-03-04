@@ -34,7 +34,11 @@ export default function AuthNavigation() {
                         <Link href="/notes/filter/all">Notes</Link>
                     </li>
                     <li className={css.navigationItem}>
-                        <Link href="/profile" prefetch={false}>
+                        <Link
+                            href="/profile"
+                            prefetch={false}
+                            aria-label="Open profile page"
+                        >
                             <Image
                                 src={user?.avatar || "/default-avatar.png"}
                                 alt="Profile"
@@ -47,7 +51,6 @@ export default function AuthNavigation() {
 
                         <button
                             className={css.logoutButton}
-                            suppressHydrationWarning
                             onClick={handleLogoutBtn}
                         >
                             Logout
@@ -61,7 +64,6 @@ export default function AuthNavigation() {
                             href="/sign-in"
                             className={css.navigationLink}
                             prefetch={false}
-                            suppressHydrationWarning
                         >
                             Login
                         </Link>
