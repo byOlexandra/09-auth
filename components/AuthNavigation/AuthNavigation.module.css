@@ -4,6 +4,13 @@
     font-size: 0.9rem;
 }
 
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+}
+
 .logoutButton {
     background: transparent;
     border: 1px solid white;
@@ -23,6 +30,11 @@
 .navigationItem {
     display: flex;
     align-items: center;
+}
+
+.navigationItem:has(.avatar) {
+    gap: 0.8rem;
+    justify-content: center;
 }
 
 .navigationLink {

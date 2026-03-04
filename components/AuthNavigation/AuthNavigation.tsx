@@ -5,6 +5,7 @@ import css from "./AuthNavigation.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/api/clientApi";
+import Image from "next/image";
 
 export default function AuthNavigation() {
     const router = useRouter();
@@ -26,25 +27,30 @@ export default function AuthNavigation() {
             <li className={css.navigationItem}>
                 <Link href="/">Home</Link>
             </li>
-            <li className={css.navigationItem}>
-                <Link href="/notes/filter/all">Notes</Link>
-            </li>
+
             {isAuthenticated ? (
                 <>
                     <li className={css.navigationItem}>
-                        <Link
-                            href="/profile"
-                            className={css.navigationLink}
-                            prefetch={false}
-                        >
-                            Profile
-                        </Link>
+                        <Link href="/notes/filter/all">Notes</Link>
                     </li>
                     <li className={css.navigationItem}>
-                        <p className={css.userEmail}>{user?.email}</p>
+                        <Link
+                            href="/profile"
+                            prefetch={false}
+                            aria-label="Open profile page"
+                        >
+                            <Image
+                                src={user?.avatar || "/default-avatar.png"}
+                                alt="Profile"
+                                width={30}
+                                height={30}
+                                className={css.avatar}
+                                priority={true}
+                            />
+                        </Link>
+
                         <button
                             className={css.logoutButton}
-                            suppressHydrationWarning
                             onClick={handleLogoutBtn}
                         >
                             Logout
@@ -58,7 +64,6 @@ export default function AuthNavigation() {
                             href="/sign-in"
                             className={css.navigationLink}
                             prefetch={false}
-                            suppressHydrationWarning
                         >
                             Login
                         </Link>

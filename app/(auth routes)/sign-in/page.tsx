@@ -40,12 +40,12 @@ export default function SignInPage() {
 
                 <div className={css.formGroup}>
                     <label htmlFor="email">Email</label>
-                    <input id="email" type="email" name="email" className={css.input} suppressHydrationWarning required />
+                    <input id="email" type="email" name="email" className={css.input} autoComplete='email' required />
                 </div>
 
                 <div className={css.formGroup}>
                     <label htmlFor="password">Password</label>
-                    <input id="password" type="password" name="password" className={css.input} suppressHydrationWarning required />
+                    <input id="password" type="password" name="password" className={css.input} required />
                 </div>
 
                 <div className={css.actions}>

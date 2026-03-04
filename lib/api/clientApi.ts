@@ -1,7 +1,6 @@
 import { CreateNoteInForm, FetchNotesResponse, Note } from "@/types/note";
 import { User } from "@/types/user";
 import { api } from "./api";
-import { AxiosResponse } from "axios";
 
 export async function fetchNotes(
     query: string,
