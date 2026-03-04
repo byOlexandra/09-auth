@@ -1,4 +1,4 @@
-# 📝 Notes App
+# 📝 NoteHub
 
 This project is a modern web application for managing notes with a full-featured authentication system. Built with **Next.js (App Router)**, it ensures fast performance, protected routes, and a seamless user experience.
 
