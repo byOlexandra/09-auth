@@ -23,3 +23,90 @@
   line-height: 28px;
   margin-bottom: 16px;
   }
+
+/*  */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px);
+  /* Вираховуємо висоту без хедера/футера */
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.content {
+  max-width: 800px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  /* Адаптивний розмір шрифту */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: #ffffff;
+}
+
+.accent {
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  /* Фіолетово-синій градієнт */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  /* Приглушений колір тексту */
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #6366f1;
+  /* Основний колір */
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+/* Анімація появи для контенту */
+.content {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -37,8 +37,8 @@ export default function SignUpPage() {
 
     return (
         <main className={css.mainContent}>
-            <h1 className={css.formTitle}>Sign up</h1>
             <form className={css.form} onSubmit={handleSubmit}>
+                <h1 className={css.formTitle}>Sign up</h1>
                 <div className={css.formGroup}>
                     <label htmlFor="email">Email</label>
                     <input
@@ -46,7 +46,7 @@ export default function SignUpPage() {
                         type="email"
                         name="email"
                         className={css.input}
-                        suppressHydrationWarning={true}
+                        autoComplete="email"
                         required
                     />
                 </div>
@@ -58,7 +58,6 @@ export default function SignUpPage() {
                         type="password"
                         name="password"
                         className={css.input}
-                        suppressHydrationWarning={true}
                         required
                     />
                 </div>

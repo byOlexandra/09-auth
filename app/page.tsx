@@ -1,20 +1,24 @@
+import Link from 'next/link';
 import css from './page.module.css'
 
 export default function Home() {
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>Welcome to NoteHub</h1>
-      <p className={css.description}>
-        NoteHub is a simple and efficient application designed for managing
-        personal notes. It helps keep your thoughts organized and accessible
-        in one place, whether you are at home or on the go.
-      </p>
-      <p className={css.description}>
-        The app provides a clean interface for writing, editing, and browsing
-        notes. With support for keyword search and structured organization,
-        NoteHub offers a streamlined experience for anyone who values clarity
-        and productivity.
-      </p>
+    <div className={css.hero}>
+      <div className={css.content}>
+        <h1 className={css.title}>Organize Your Thoughts with <span className={css.accent}>NoteHub</span></h1>
+        <p className={css.description}>
+          A simple and efficient application designed for managing personal notes.
+          Keep your thoughts organized and accessible in one place.
+        </p>
+        <div className={css.actions}>
+          <Link href="/sign-up" className={css.btn}>Start for Free</Link>
+        </div>
+      </div>
+
+      {/* Тут може бути ваша картинка або анімований елемент */}
+      {/* <div className={css.imageWrapper}>
+        <Image src="/hero-illustration.png" alt="Notes illustration" width={500} height={400} />
+      </div> */}
     </div>
   );
 }
