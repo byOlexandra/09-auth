@@ -33,12 +33,11 @@ export default function AuthNavigation() {
 
     return (
         <>
-            <li className={css.navigationItem}>
-                <Link href="/">Home</Link>
-            </li>
-
             {isAuthenticated ? (
                 <>
+                    <li className={css.navigationItem}>
+                        <Link href="/">Home</Link>
+                    </li>
                     <li className={css.navigationItem}>
                         <Link href="/notes/filter/all">Notes</Link>
                     </li>
@@ -58,10 +57,7 @@ export default function AuthNavigation() {
                             />
                         </Link>
 
-                        <button
-                            className={css.logoutButton}
-                            onClick={handleLogoutBtn}
-                        >
+                        <button className={css.logoutButton} onClick={handleLogoutBtn}>
                             Logout
                         </button>
                     </li>
