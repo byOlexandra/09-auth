@@ -6,8 +6,11 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/api/clientApi";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function AuthNavigation() {
+    const [isHydrated, setIsHydrated] = useState(false);
+
     const router = useRouter();
     const { user, isAuthenticated, clearIsAuthenticated } = useAuthStore();
 
@@ -21,6 +24,12 @@ export default function AuthNavigation() {
             router.push("/sign-in");
         }
     };
+
+    useEffect(() => {
+        setIsHydrated(true);
+    }, []);
+
+    if (!isHydrated) return null;
 
     return (
         <>
