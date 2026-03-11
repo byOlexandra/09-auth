@@ -15,7 +15,6 @@ export async function fetchNotes(
                 tag: tag === "all" ? undefined : tag,
             },
         });
-        console.log(data);
         return {
             notes: data.notes || [],
             totalPages: data.totalPages || 1,
